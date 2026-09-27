@@ -2,6 +2,11 @@
 bin/
 obj/
 
+# Runtime files the app creates next to the exe
+settings.json
+settings.json.bad
+HttpResponsePlotter.csv
+
 # IDE
 .vs/
 .vscode/
