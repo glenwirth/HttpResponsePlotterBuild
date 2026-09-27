@@ -29,9 +29,10 @@ public sealed class AppSettings
     private const string CatChart = "5. Chart";
     private const string CatLogging = "6. Logging";
 
-    public static string DefaultPath => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-        "HttpResponsePlotter", "settings.json");
+    /// <summary>Folder containing the executable (correct for single-file publish too).</summary>
+    public static string ExeDirectory => AppContext.BaseDirectory;
+
+    public static string DefaultPath => Path.Combine(ExeDirectory, "settings.json");
 
     // ---------- URL 1 ----------
     [Category(CatUrl1), DisplayName("URL"), Description("Address to measure.")]
@@ -152,8 +153,7 @@ public sealed class AppSettings
     public bool LogToCsv { get; set; } = false;
 
     [Category(CatLogging), DisplayName("CSV log path")]
-    public string CsvLogPath { get; set; } = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "HttpResponsePlotter.csv");
+    public string CsvLogPath { get; set; } = Path.Combine(ExeDirectory, "HttpResponsePlotter.csv");
 
     // ---------- Helpers ----------
     private static Color ParseColor(string hex)

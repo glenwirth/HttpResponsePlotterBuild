@@ -105,13 +105,9 @@ A sample is a failure if any of the following happens:
 
 Open **Settings...** to change any option. Clicking **OK** checks the values, saves them, and applies them right away. If polling was running, it restarts with the new settings. **Reset to defaults** restores the factory settings.
 
-Settings are saved as JSON to:
+Settings are saved as JSON to `settings.json` in the same folder as `HttpResponsePlotter.exe`, or to the file given with `--config`. If that file can't be read, the program starts with default settings and saves a copy of the bad file as `settings.json.bad`.
 
-```
-%APPDATA%\HttpResponsePlotter\settings.json
-```
-
-or to the file given with `--config`. If that file can't be read, the program starts with default settings and saves a copy of the bad file as `settings.json.bad`.
+> The program needs write access to its own folder to save settings and the default CSV log. Don't put it in a protected folder such as `C:\Program Files`; if you do, use `--config` and **CSV log path** to point to a writable location.
 
 ### 1. URL 1 / 2. URL 2
 
@@ -168,7 +164,7 @@ Both URLs are requested at the same time on each tick. The next round only start
 | Setting | Default | Description |
 |---|---|---|
 | Log samples to CSV | `false` | Append every sample to a CSV file as it is measured |
-| CSV log path | `%USERPROFILE%\Documents\HttpResponsePlotter.csv` | The file to append to. The folder and header row are created if needed. |
+| CSV log path | `HttpResponsePlotter.csv` in the same folder as the exe | The file to append to. The folder and header row are created if needed. |
 
 If writing to the log file fails, the error is shown in the status bar and polling carries on.
 
@@ -233,7 +229,7 @@ Fields that contain commas, quotes or line breaks are quoted using standard CSV 
   "GridColorHex": "#E6E6E6",
   "ThresholdColorHex": "#D62728",
   "LogToCsv": false,
-  "CsvLogPath": "C:\\Users\\<you>\\Documents\\HttpResponsePlotter.csv"
+  "CsvLogPath": "C:\\Code\\HttpResponsePlotterBuild\\publish\\HttpResponsePlotter.csv"
 }
 ```
 
